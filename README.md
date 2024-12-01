@@ -1,6 +1,6 @@
 # Advent of Code 2024 in Python
 
-by Philipp Prillers
+by Philipp Priller
 
 ## How to run
 
