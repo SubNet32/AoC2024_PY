@@ -23,8 +23,9 @@
       "from pathlib import Path ",
       "start_time = time.time()",
       "cwd = Path(__file__).parent",
-      "path = str(cwd) + \"\\input.txt\"",
+      "path = cwd.joinpath(\"input.txt\")",
       "file = open(path, \"r\").read().splitlines()",
+      "",
       "",
       "print(\"--- %s seconds ---\" % (time.time() - start_time))",
       "print(\"result\", \"\")"
