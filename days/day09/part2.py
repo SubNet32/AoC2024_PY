@@ -14,15 +14,7 @@ for i,c in enumerate(diskMap):
     if i % 2 == 0:
         id += 1 
     blocks.append({"id":id if i % 2 == 0 else empty, "c":c})
-   
-
-def printBlocks(blocks:list):
-    if(len(blocks) > 100): return
-    printStr = ""
-    for x in blocks:
-        printStr += str.join("",[str(x["id"] if x["id"] != empty else ".") for _ in range(x["c"])])
-    print(printStr)
-    
+       
 def calcCheckSum(blocks:list):
     sum  = 0
     c = 0
@@ -33,9 +25,8 @@ def calcCheckSum(blocks:list):
             c += 1
     return sum
 
-printBlocks(blocks)
-
 picker = len(blocks) - 1
+startIndex = {}
 while(True):
     while(blocks[picker]["id"] == empty and picker > 0):
         picker -= 1
@@ -43,9 +34,11 @@ while(True):
     if(picker == 0):
         break
     reqSpace = blocks[picker]["c"]
-    finder = 0
+    finder = startIndex[reqSpace] if reqSpace in startIndex else 0
     while((blocks[finder]["id"] != empty or blocks[finder]["c"] < reqSpace) and finder < picker):
         finder += 1
+        
+    startIndex[reqSpace] = finder
    
     if(finder >= picker):
         picker -= 1
@@ -61,8 +54,6 @@ while(True):
     else:
         blocks.insert(finder, r)
         picker += 1
-    printBlocks(blocks)
-
 
 print("--- %s seconds ---" % (time.time() - start_time))
 print("result", calcCheckSum(blocks))
