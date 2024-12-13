@@ -113,7 +113,7 @@ def isUTurnCorner(pos: tuple, region: set):
             checkPos.append(turnPos)
             if(turnPos in region):
                 foundTurn = False
-                # break
+                break
         # print(checkPos)
         # printField(field, checkPos, pos)
         if(foundTurn):
