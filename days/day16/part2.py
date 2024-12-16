@@ -77,14 +77,14 @@ def printField(pos: Position):
         print(line)
 
 current = Position(0, start, (1,0), None)
-visited = dict[tuple[tuple[int]], Position]()
+visited = set[tuple[int]]()
 toVisit = dict[tuple[tuple[int]], Position]()
 result = 0
 while(current != end):
     # print("Cost", current.cost)
     # printField(current)
     # print()
-    visited[(current.pos, current.dir)] = current
+    visited.add((current.pos, current.dir))
     adjPositions = getAdjacentPositions(current)
     for adjPos in adjPositions:
         if(adjPos.pos == end):
@@ -96,8 +96,6 @@ while(current != end):
         foundPos = False
         if((adjPos.pos, adjPos.dir) in visited):
             foundPos = True
-            if(visited[(adjPos.pos, adjPos.dir)].cost == adjPos.cost):
-                visited[(adjPos.pos, adjPos.dir)].prev += adjPos.prev
         elif((adjPos.pos, adjPos.dir) in toVisit):
             foundPos = True
             if(toVisit[(adjPos.pos, adjPos.dir)].cost == adjPos.cost):
@@ -107,7 +105,7 @@ while(current != end):
 
     if(result > 0):
         break
-
+    
     lowestCost = None
     for pos in toVisit:
         if(lowestCost == None or toVisit[pos].cost < toVisit[lowestCost].cost):
