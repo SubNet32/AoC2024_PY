@@ -81,7 +81,7 @@ testValue = minV
 smoothness = 4096
 while(True):   
     testValue = minV
-    step = 1 if maxV-minV < 1_000_000 else math.floor((maxV-minV) / smoothness)
+    step = 1 if maxV-minV < 100_000 else math.floor((maxV-minV) / smoothness)
     lowestV = 0
     highestV = 0
     bestC = 0
